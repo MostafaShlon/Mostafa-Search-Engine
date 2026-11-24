@@ -1,0 +1,63 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Mostafa Search</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f8fafc;
+      min-height: 100vh;
+      margin: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .container {
+      text-align: center;
+      width: 90%;
+      max-width: 600px;
+    }
+    h1 {
+      font-size: 52px;
+      color: #2563eb;
+      margin-bottom: 30px;
+    }
+    input {
+      width: 100%;
+      box-sizing: border-box;
+      padding: 18px;
+      font-size: 17px;
+      border: 1px solid #ddd;
+      border-radius: 30px;
+    }
+    button {
+      margin-top: 20px;
+      padding: 14px 35px;
+      border: none;
+      border-radius: 8px;
+      background: #2563eb;
+      color: white;
+      font-size: 16px;
+      cursor: pointer;
+    }
+    button:hover {
+      background: #1d4ed8;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Mostafa Search</h1>
+    <form action="https://www.google.com/search" method="GET">
+      <input type="text" name="q"
+             placeholder="Search the web..."
+             required>
+      <button type="submit">Search</button>
+    </form>
+    <p>Powered by Google Search</p>
+  </div>
+</body>
+</html>
