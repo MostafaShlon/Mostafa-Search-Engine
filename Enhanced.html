@@ -1,0 +1,405 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Mostafa Search | Explore Everything</title>
+
+<style>
+:root {
+  --bg: #080d1d;
+  --text: #ffffff;
+  --muted: #a6b1cf;
+  --card: rgba(255,255,255,0.07);
+  --border: rgba(255,255,255,0.15);
+}
+
+body.light {
+  --bg: #f4f7ff;
+  --text: #1c2540;
+  --muted: #65718d;
+  --card: rgba(255,255,255,0.85);
+  --border: rgba(30,40,80,0.15);
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  font-family: Arial, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  transition: background .3s, color .3s;
+  overflow-x: hidden;
+}
+
+.background {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  background:
+    radial-gradient(circle at 20% 20%, #624ac044, transparent 40%),
+    radial-gradient(circle at 85% 80%, #08b6bc33, transparent 40%);
+  animation: glow 9s ease-in-out infinite alternate;
+}
+
+@keyframes glow {
+  from { opacity: .55; transform: scale(1); }
+  to { opacity: 1; transform: scale(1.12); }
+}
+
+header {
+  max-width: 1100px;
+  margin: auto;
+  padding: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.brand {
+  font-size: 17px;
+  font-weight: bold;
+  letter-spacing: 1px;
+}
+
+.theme {
+  background: var(--card);
+  border: 1px solid var(--border);
+  color: var(--text);
+  padding: 11px 17px;
+  border-radius: 25px;
+  cursor: pointer;
+}
+
+main {
+  min-height: calc(100vh - 165px);
+  max-width: 750px;
+  margin: auto;
+  padding: 70px 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+.logo {
+  width: 85px;
+  height: 85px;
+  border-radius: 25px;
+  background: linear-gradient(135deg, #816cff, #20d7c6);
+  display: grid;
+  place-items: center;
+  font-size: 45px;
+  font-weight: bold;
+  color: white;
+  box-shadow: 0 0 50px #756dff55;
+  cursor: pointer;
+  user-select: none;
+  transition: transform .3s;
+}
+
+.logo:hover {
+  transform: rotate(-8deg) scale(1.1);
+}
+
+h1 {
+  font-size: clamp(42px, 8vw, 76px);
+  letter-spacing: -3px;
+  margin: 28px 0 14px;
+}
+
+.gradient {
+  background: linear-gradient(90deg, #8e86ff, #2ed9c9);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.subtitle {
+  color: var(--muted);
+  font-size: 17px;
+  line-height: 1.7;
+  margin-bottom: 36px;
+}
+
+.search-box {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  padding: 9px;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  box-shadow: 0 18px 50px #00000025;
+}
+
+.search-box input {
+  flex: 1;
+  width: 100%;
+  min-width: 0;
+  background: transparent;
+  border: none;
+  outline: none;
+  color: var(--text);
+  font-size: 17px;
+  padding: 15px;
+}
+
+.search-box button {
+  background: linear-gradient(135deg, #7973f2, #32b9ab);
+  border: none;
+  border-radius: 12px;
+  color: white;
+  padding: 16px 22px;
+  font-size: 15px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.search-box button:hover {
+  filter: brightness(1.2);
+}
+
+.powered {
+  color: var(--muted);
+  font-size: 12px;
+  margin-top: 16px;
+}
+
+.quick {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 11px;
+  margin-top: 36px;
+}
+
+.quick button {
+  background: var(--card);
+  border: 1px solid var(--border);
+  color: var(--text);
+  padding: 13px 17px;
+  border-radius: 30px;
+  cursor: pointer;
+  transition: .2s;
+}
+
+.quick button:hover {
+  transform: translateY(-4px);
+  border-color: #8983ff;
+}
+
+.clock {
+  margin-top: 45px;
+  font-size: 14px;
+  color: var(--muted);
+}
+
+footer {
+  text-align: center;
+  color: var(--muted);
+  padding: 24px;
+  font-size: 13px;
+}
+
+.confetti {
+  position: fixed;
+  top: -20px;
+  width: 10px;
+  height: 15px;
+  z-index: 10;
+  pointer-events: none;
+  animation: fall 3s linear forwards;
+}
+
+@keyframes fall {
+  to {
+    transform: translateY(110vh) rotate(720deg);
+    opacity: 0;
+  }
+}
+
+@media (max-width: 500px) {
+  header { padding: 18px; }
+  main { padding: 45px 17px; }
+  .search-box input { padding: 10px; font-size: 15px; }
+  .search-box button { padding: 14px; }
+}
+</style>
+</head>
+
+<body>
+
+<div class="background"></div>
+
+<header>
+  <div class="brand">✦ MOSTAFA SEARCH</div>
+  <button class="theme" onclick="toggleTheme()" id="themeButton">
+    ☀️ Light Mode
+  </button>
+</header>
+
+<main>
+
+  <div class="logo" onclick="secretClick()" title="Click me!">
+    M
+  </div>
+
+  <h1>Search <span class="gradient">Beyond.</span></h1>
+
+  <p class="subtitle">
+    Your gateway to infinite possibilities.<br>
+    One search. Endless discoveries.
+  </p>
+
+  <form class="search-box"
+        action="https://www.google.com/search"
+        method="GET">
+
+    <input
+      id="searchInput"
+      type="search"
+      name="q"
+      placeholder="What are you curious about?"
+      aria-label="Search the web"
+      required
+      autofocus>
+
+    <button type="submit">Search ↗</button>
+
+  </form>
+
+  <div class="powered">
+    Powered by Google Search · Made with curiosity
+  </div>
+
+  <div class="quick">
+    <button onclick="quickSearch('Latest AI news')">
+      🤖 Artificial Intelligence
+    </button>
+
+    <button onclick="quickSearch('Amazing travel destinations')">
+      🌍 Explore the World
+    </button>
+
+    <button onclick="quickSearch('Latest technology inventions')">
+      🚀 Technology
+    </button>
+
+    <button onclick="surpriseSearch()">
+      🎲 Surprise Me
+    </button>
+  </div>
+
+  <div class="clock" id="clock"></div>
+
+</main>
+
+<footer>
+  © 2026 Mostafa Search · Dream Big. Search Bigger.
+</footer>
+
+<script>
+function toggleTheme() {
+  document.body.classList.toggle("light");
+
+  const isLight = document.body.classList.contains("light");
+
+  document.getElementById("themeButton").textContent =
+    isLight ? "🌙 Dark Mode" : "☀️ Light Mode";
+}
+
+function quickSearch(query) {
+  window.location.href =
+    "https://www.google.com/search?q=" +
+    encodeURIComponent(query);
+}
+
+function surpriseSearch() {
+  const topics = [
+    "10 mind blowing science facts",
+    "The most beautiful places on Earth",
+    "Amazing discoveries in space",
+    "Interesting facts about Lebanon",
+    "Strangest inventions ever created",
+    "Future technology predictions",
+    "Fun facts you probably don't know"
+  ];
+
+  const randomTopic =
+    topics[Math.floor(Math.random() * topics.length)];
+
+  quickSearch(randomTopic);
+}
+
+function updateClock() {
+  document.getElementById("clock").textContent =
+    new Date().toLocaleString(undefined, {
+      weekday: "long",
+      year: "numeric",
+      month: "long",
+      day: "numeric",
+      hour: "numeric",
+      minute: "2-digit"
+    });
+}
+
+updateClock();
+setInterval(updateClock, 1000);
+
+// Hidden Easter egg: click the logo 5 times!
+let clicks = 0;
+let resetClicks;
+
+function secretClick() {
+  clicks++;
+  clearTimeout(resetClicks);
+
+  if (clicks >= 5) {
+    clicks = 0;
+    launchConfetti();
+
+    setTimeout(() => {
+      alert("🎉 You discovered the secret! Mostafa Search rocks!");
+    }, 400);
+  } else {
+    resetClicks = setTimeout(() => {
+      clicks = 0;
+    }, 3000);
+  }
+}
+
+function launchConfetti() {
+  const colors = ["#8b7fff", "#26d9c8", "#ffd166", "#ff6b9a"];
+
+  for (let i = 0; i < 80; i++) {
+    const piece = document.createElement("div");
+    piece.className = "confetti";
+    piece.style.left = Math.random() * 100 + "vw";
+    piece.style.background = colors[i % colors.length];
+    piece.style.animationDelay = Math.random() * 0.8 + "s";
+
+    document.body.appendChild(piece);
+
+    setTimeout(() => piece.remove(), 4000);
+  }
+}
+
+// Press "/" to focus the search bar.
+document.addEventListener("keydown", function(event) {
+  if (
+    event.key === "/" &&
+    document.activeElement.tagName !== "INPUT"
+  ) {
+    event.preventDefault();
+    document.getElementById("searchInput").focus();
+  }
+});
+</script>
+
+</body>
+</html>
